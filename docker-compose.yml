@@ -1,0 +1,34 @@
+version: "3.3"
+# docker run -p 8080:8080 -p 50000:50000 -v "$PWD/jenkins_home:/var/jenkins_home" jenkins/jenkins:lts
+services:
+  jenkins-master:
+    image: jenkins/jenkins:lts
+    privileged: true
+    user: root
+    container_name: jenkins
+    environment:
+      - TZ=America/Denver
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - $HOME/jenkins:/var/jenkins_home
+    ports:
+      - 8080:8080
+      - 50000:50000
+
+  # docker run -d --rm --name=agent1 -p 22:22 -e \
+  # "JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDOSoL+raxC+QQDZy6yEUpZJ733FSlYYUX4shC1pbUmGNAWehPs/CKhYJoxiraI5cKRz9heHt3AZINnb9noIZoLAEspcU37oueRwLRBTmkMaCqAo1DFj7OFaE5WEm7dqXCyQYrhx+y89iOYtuEHWIyXNbQsPkLdGo5lpUYKOJcpGGpvCCW5CHP9OmoB9kkqqsXecCu19XFKju4+UZne1B6sHC6XXmeN7yJl+mPF6qo62rR0pmqhJVLjyHMTOp84N8C2Kum0Lq9Y7YpJNzSS6qgFWWAgAOtwEXNTkZmn41UqdAtW220fVZ47lXTkarkKsBa2lWA9KnF1E8WpAmDVMM+OXBA0sy1pWwrIieiiSKWNMRQdqfwwCqya6nREWu2X1GrZ+8ddRTkr3BwRZWk/bpLnm54lHU5fVMAbMgl4sKch3RWMmpcqQ8uXw2q8vF8/oasa6rj7zKpFYUyrPNofia+JtQyE5kpb+TtvOVfyVQt3x79i3RPyLz5MeiZa9bmNZk= brandonwilliams@C02XL051JGH7" \
+  # jenkins/ssh-agent:jdk11
+  jenkins-agent:
+    image: brandonwilliams2/jenkins-ssh-agent
+    # build: $HOME/Workspace/Projects/jenkins-docker-runner/
+    depends_on:
+      - "jenkins-master"
+    container_name: agent1
+    user: root
+    environment:
+      JENKINS_AGENT_SSH_PUBKEY: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDOSoL+raxC+QQDZy6yEUpZJ733FSlYYUX4shC1pbUmGNAWehPs/CKhYJoxiraI5cKRz9heHt3AZINnb9noIZoLAEspcU37oueRwLRBTmkMaCqAo1DFj7OFaE5WEm7dqXCyQYrhx+y89iOYtuEHWIyXNbQsPkLdGo5lpUYKOJcpGGpvCCW5CHP9OmoB9kkqqsXecCu19XFKju4+UZne1B6sHC6XXmeN7yJl+mPF6qo62rR0pmqhJVLjyHMTOp84N8C2Kum0Lq9Y7YpJNzSS6qgFWWAgAOtwEXNTkZmn41UqdAtW220fVZ47lXTkarkKsBa2lWA9KnF1E8WpAmDVMM+OXBA0sy1pWwrIieiiSKWNMRQdqfwwCqya6nREWu2X1GrZ+8ddRTkr3BwRZWk/bpLnm54lHU5fVMAbMgl4sKch3RWMmpcqQ8uXw2q8vF8/oasa6rj7zKpFYUyrPNofia+JtQyE5kpb+TtvOVfyVQt3x79i3RPyLz5MeiZa9bmNZk= brandonwilliams@C02XL051JGH7"
+    volumes:
+    - /Users/brandonwilliams/jenkins:/var/jenkins
+    ports:
+      - 22:22
