@@ -29,6 +29,6 @@ services:
     environment:
       JENKINS_AGENT_SSH_PUBKEY: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDOSoL+raxC+QQDZy6yEUpZJ733FSlYYUX4shC1pbUmGNAWehPs/CKhYJoxiraI5cKRz9heHt3AZINnb9noIZoLAEspcU37oueRwLRBTmkMaCqAo1DFj7OFaE5WEm7dqXCyQYrhx+y89iOYtuEHWIyXNbQsPkLdGo5lpUYKOJcpGGpvCCW5CHP9OmoB9kkqqsXecCu19XFKju4+UZne1B6sHC6XXmeN7yJl+mPF6qo62rR0pmqhJVLjyHMTOp84N8C2Kum0Lq9Y7YpJNzSS6qgFWWAgAOtwEXNTkZmn41UqdAtW220fVZ47lXTkarkKsBa2lWA9KnF1E8WpAmDVMM+OXBA0sy1pWwrIieiiSKWNMRQdqfwwCqya6nREWu2X1GrZ+8ddRTkr3BwRZWk/bpLnm54lHU5fVMAbMgl4sKch3RWMmpcqQ8uXw2q8vF8/oasa6rj7zKpFYUyrPNofia+JtQyE5kpb+TtvOVfyVQt3x79i3RPyLz5MeiZa9bmNZk= brandonwilliams@C02XL051JGH7"
     volumes:
-    - /Users/brandonwilliams/jenkins:/var/jenkins
+    - $HOME/jenkins:/var/jenkins
     ports:
       - 22:22
