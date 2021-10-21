@@ -2,8 +2,8 @@
 Dockerfile and docker-compose.yml to quickly spin-up a Jenkins controller + agent
 
 ### Requirements:
-1. Docker has been downloaded and installed on your machine
-2. Dockerhub account has been created
+1. Docker has been downloaded and installed on your machine (https://www.docker.com/products/docker-desktop)
+2. Dockerhub account has been created (https://hub.docker.com/)
 3. SSH key pair (see: https://www.jenkins.io/doc/book/using/using-agents/ Generating an SSH key pair)
 
 ## Setup
@@ -12,6 +12,20 @@ The first time we run the project we have manually navigate to Jenkins and set e
 https://github.boozallencsn.com/HUBQACOP/jenkins-docker-runner
 
 ### Create Docker Image (Optional)
+1. Run the following command from the directory where the Dockerfile is located or specify it's location:
+`docker build -t=<your-dockerhub-username>/<image-name> .`
+(Don't forget the dot - it provides the context of where the Dockerfile is located)
+2. push the image to your dockerhub repo
+````
+docker login
+docker push <your-dockerhub-username>/<image-name>
+````
+replace the current image name with your image in the docker-compose.yml
+- **Note**: alternatively, we can uncomment the build node in the docker-compose.yml and run:
+````
+docker compose build && docker compose up
+````
+To build and start our agent image and container
 
 ### Modify docker-compose.yml 
 1. Replace JENKINS_AGENT_SSH_PUBKEY: with your public-key
