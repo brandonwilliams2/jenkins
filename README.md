@@ -2,8 +2,8 @@
 Dockerfile and docker-compose.yml to quickly spin-up a Jenkins controller + agent
 
 ### Requirements:
-1. Docker has been downloaded and installed on your machine (https://www.docker.com/products/docker-desktop)
-2. Dockerhub account has been created (https://hub.docker.com/)
+1. Docker has been downloaded, installed, and running on your machine (https://www.docker.com/products/docker-desktop)
+2. Dockerhub account has been created (https://hub.docker.com/) (optional)
 3. SSH key pair (see: https://www.jenkins.io/doc/book/using/using-agents/ Generating an SSH key pair)
 
 ## Setup
