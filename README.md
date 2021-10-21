@@ -7,12 +7,12 @@ Dockerfile and docker-compose.yml to quickly spin-up a Jenkins controller + agen
 3. SSH key pair (see: https://www.jenkins.io/doc/book/using/using-agents/ Generating an SSH key pair)
 
 ## Setup
-The first time we run the project we have manually navigate to Jenkins and set everything up. On subsequent runs we can start both the Jenkins controller and agent with one command! 
+The first time we run the project we have to manually navigate to Jenkins and set everything up. On subsequent runs we can start both the Jenkins controller and agent with one command! 
 ### Clone Repo
 https://github.boozallencsn.com/HUBQACOP/jenkins-docker-runner
 
 ### Create Docker Image (Optional)
-1. Run the following command from the directory where the Dockerfile is located or specify it's location:
+1. Run the following command from the directory where the Dockerfile is located or specify its location:
 `docker build -t=<your-dockerhub-username>/<image-name> .`
 (Don't forget the dot - it provides the context of where the Dockerfile is located)
 2. push the image to your dockerhub repo
@@ -45,7 +45,7 @@ localhost:8080
 ````
 - Enter the default password
 - select the default plugin installation
-- enter admin or whatever login credentials and email you desire
+- enter 'admin' or whatever login credentials and email you desire
 
 ### Create a Jenkins SSH credential
 1. Jenkins dashboard > Manage jenkins (side menu) > Manage Credentials (center menu)
@@ -75,22 +75,22 @@ localhost:8080
    
    - Launch method; (e.g.: Launch agents via SSH )
    
-   - Host; (your local machines IP address - found on mac at System Preferences > Network, under the **Connected** field)
+   - Host; (your local machines IP address - found on Mac at System Preferences > Network, under the **Connected** field)
    
    - Credentials; (e.g.: jenkins )
    
    - Host Key verification Strategy; (e.g.: Manually trusted key verification …​ )
    - Do not check 'Require manual verification...'
    
-3. Click save and the agent will be registered, but offline. 
+3. Click save, and the agent will be registered, but offline. 
 
 
 
 ### Stop Jenkins
-Enter `cntrl + c` in the terminal where you started to stop the Jenkins controller -or- enter `docker compose down` from the directory where the docker-compose.yml is located.
+Enter `ctrl + c` in the terminal where you started to stop the Jenkins controller -or- enter `docker compose down` from the directory where the docker-compose.yml is located.
 
 ### Start the Jenkins Controller + Agent
-Enter `docker compose up` to start both the Jenkins controller **AND** the agent node  
+Run: `docker compose up` to start both the Jenkins controller **AND** the agent node  
 
 **NOTE:** 
 use `docker compose up -d` to start everything in 'detached' or 'background' mode. You won't see the console logs, but it will return to the terminal where you can use `docker compose down` to bring everything down.

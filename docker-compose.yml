@@ -1,7 +1,7 @@
 version: "3.3"
 # docker run -p 8080:8080 -p 50000:50000 -v "$PWD/jenkins_home:/var/jenkins_home" jenkins/jenkins:lts
 services:
-  jenkins-master:
+  jenkins-controller:
     image: jenkins/jenkins:lts
     privileged: true
     user: root
@@ -23,7 +23,7 @@ services:
     image: brandonwilliams2/jenkins-ssh-agent
     # build: $HOME/Workspace/Projects/jenkins-docker-runner/
     depends_on:
-      - "jenkins-master"
+      - "jenkins-controller"
     container_name: agent1
     user: root
     environment:
