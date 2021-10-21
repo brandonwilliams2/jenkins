@@ -33,16 +33,23 @@ To build and start our agent image and container
 
 ### Start Jenkins Controller (master)
 ````
-docker compose up --service jenkins-master
+docker compose up jenkins-master
 ````
+- You should receive a default password in the console output. 
+-  Copy this password
 
-### Navigate to Jenkins Server Web Interface
+
+### Navigate to Jenkins Web Interface
 ````
 localhost:8080 
 ````
+- Enter the default password
+- select the default plugin installation
+- enter admin or whatever login credentials and email you desire
+
 ### Create a Jenkins SSH credential
 1. Jenkins dashboard > Manage jenkins (side menu) > Manage Credentials (center menu)
-2. Select 'Add credentials'
+2. Select 'Add credentials' (drop-down menu next to global for jenkins)
 3. fill form:
 - Kind: SSH Username with private key;
 - id: jenkins
@@ -51,21 +58,20 @@ localhost:8080
 
 - Private Key: select Enter directly, copy and paste your key, and press the Add button to insert your private key 
     - run: `cat ~/.ssh/jenkins_agent_key` to get your key
+    - copy the entire key (including the beginning and end phrases)
 
 - Passphrase: fill your passphrase used to generate the SSH key pair and then press OK
 ![alt text](https://www.jenkins.io/doc/book/resources/node/credentials-3.png)
 
 ## Create a Jenkins agent
 1. Jenkins dashboard > Manage jenkins (side menu) > Manage Nodes and Clouds (center menu) > New Node (side menu)
-2. Fill the Node/agent name and select the type; (e.g. Name: agent1, Type: Permanent Agent)
+2. Fill the Node/agent name: agent1
+   - Select the Type: Permanent Agent
+   - Remote root directory: /var/jenkins 
    
-   - Now fill the fields:
+   - label: agent1 
    
-   - Remote root directory; (e.g.: /var/jenkins )
-   
-   - label; (e.g.: agent1 )
-   
-   - usage; (e.g.: Use this node as much as possible)
+   - usage: Use this node as much as possible
    
    - Launch method; (e.g.: Launch agents via SSH )
    
@@ -74,16 +80,17 @@ localhost:8080
    - Credentials; (e.g.: jenkins )
    
    - Host Key verification Strategy; (e.g.: Manually trusted key verification …​ )
+   - Do not check 'Require manual verification...'
    
-3. Click save and the agent will be registered, but offline. Click on it.
-4. Click Launch Agent
-5. Click Console Logs
-6. Look for the message: `Agent successfully connected and online on the last log line.`
+3. Click save and the agent will be registered, but offline. 
+
+
 
 ### Stop Jenkins
 Enter `cntrl + c` in the terminal where you started to stop the Jenkins controller -or- enter `docker compose down` from the directory where the docker-compose.yml is located.
 
 ### Start the Jenkins Controller + Agent
-Enter `docker compose up` to start both the Jenkins controller and the agent
+Enter `docker compose up` to start both the Jenkins controller **AND** the agent node  
+
 **NOTE:** 
 use `docker compose up -d` to start everything in 'detached' or 'background' mode. You won't see the console logs, but it will return to the terminal where you can use `docker compose down` to bring everything down.
