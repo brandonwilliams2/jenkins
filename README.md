@@ -28,7 +28,8 @@ docker compose build && docker compose up
 To build and start our agent image and container
 
 ### Modify docker-compose.yml 
-1. Replace JENKINS_AGENT_SSH_PUBKEY: with your public-key
+1. Replace JENKINS_AGENT_SSH_PUBKEY: with your public key
+    - run: `cat ~/.ssh/jenkins_agent_key.pub` to get your key
 
 ### Start Jenkins Controller (master)
 ````
