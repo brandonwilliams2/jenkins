@@ -13,7 +13,11 @@ https://github.boozallencsn.com/HUBQACOP/jenkins-docker-runner
 
 ### Create Docker Image (Optional)
 1. Run the following command from the directory where the Dockerfile is located or specify its location:
-`docker build -t=<your-dockerhub-username>/<image-name> .`
+
+````
+docker build -t=<your-dockerhub-username>/<image-name> .
+````
+
 (Don't forget the dot - it provides the context of where the Dockerfile is located)
 2. push the image to your dockerhub repo
 ````
