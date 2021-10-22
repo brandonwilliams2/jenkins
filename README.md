@@ -31,9 +31,9 @@ To build and start our agent image and container
 1. Replace JENKINS_AGENT_SSH_PUBKEY: with your public key
     - run: `cat ~/.ssh/jenkins_agent_key.pub` to get your key
 
-### Start Jenkins Controller (master)
+### Start Jenkins Controller 
 ````
-docker compose up jenkins-master
+docker compose up jenkins-controller
 ````
 - You should receive a default password in the console output. 
 -  Copy this password
