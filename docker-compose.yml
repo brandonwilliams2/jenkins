@@ -31,5 +31,7 @@ services:
     volumes:
     - $HOME/jenkins/jenkins_agent1:/var/jenkins
     - $HOME/jenkins/jenkins_agent1/workspace/Selenium_Docker_Builder:/var/jenkins/workspace/Selenium_Docker_Builder
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/bin/docker:/usr/bin/docker
     ports:
       - 22:22
