@@ -50,7 +50,7 @@ localhost:8080
 ## Stop here (optional)
 You now have a fully functional Jenkins controller that you can start and stop with:
 ````
-docker compose up jenkins-master
+docker compose up jenkins-controller
 docker compose down
 ````
 You can use the Jenkins controller to execute jobs but that is NOT a recommended best practice by Jenkins.
