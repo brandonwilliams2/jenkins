@@ -12,23 +12,24 @@ The first time we run the project we have to manually navigate to Jenkins and se
 https://github.boozallencsn.com/HUBQACOP/jenkins-docker-runner
 
 ### Create Docker Image (Optional)
+You can create your own custom docker image or use the one currently referenced in the docker-compose.yml
 1. Run the following command from the directory where the Dockerfile is located or specify its location:
 
-````
-docker build -t=<your-dockerhub-username>/<image-name> .
-````
+    ````
+    docker build -t=<your-dockerhub-username>/<image-name> .
+    ````
 
 (Don't forget the dot - it provides the context of where the Dockerfile is located)
 2. push the image to your dockerhub repo
-````
-docker login
-docker push <your-dockerhub-username>/<image-name>
-````
+    ````
+    docker login
+    docker push <your-dockerhub-username>/<image-name>
+    ````
 replace the current image name with your image in the docker-compose.yml
 - **Note**: alternatively, we can uncomment the build node in the docker-compose.yml and run:
-````
-docker compose build && docker compose up
-````
+    ````
+    docker compose build && docker compose up
+    ````
 To build and start our agent image and container
 
 ### Modify docker-compose.yml 
