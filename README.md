@@ -47,6 +47,15 @@ localhost:8080
 - select the default plugin installation
 - enter 'admin' or whatever login credentials and email you desire
 
+## Stop here (optional)
+You now have a fully functional Jenkins controller that you can continue to start and stop with:
+````
+docker compose up jenkins-master
+docker compose down
+````
+
+The following steps walk you through creating a jenkins agent to execute jobs.
+
 ### Create a Jenkins SSH credential
 1. Jenkins dashboard > Manage jenkins (side menu) > Manage Credentials (center menu)
 2. Select 'Add credentials' (drop-down menu next to global for jenkins)
