@@ -1,44 +1,20 @@
 # jenkins-docker-runner
-Dockerfile and docker-compose.yml to quickly spin-up a Jenkins controller + agent
+docker-compose.yml to quickly spin-up a Jenkins server
 
 ### Requirements:
 1. Docker has been downloaded, installed, and running on your machine (https://www.docker.com/products/docker-desktop)
 2. Dockerhub account has been created (https://hub.docker.com/) (optional)
-3. SSH key pair (see: https://www.jenkins.io/doc/book/using/using-agents/ Generating an SSH key pair)
+
 
 ## Setup
-The first time we run the project we have to manually navigate to Jenkins and set everything up. On subsequent runs we can start both the Jenkins controller and agent with one command! 
+The first time we run the project we have to manually navigate to Jenkins and set everything up. On subsequent runs the server configurations will be saved
+
 ### Clone Repo
-https://github.boozallencsn.com/HUBQACOP/jenkins-docker-runner
+https://github.com/brandonwilliams2/jenkins-runner.git
 
-### Create Docker Image (Optional)
-You can create your own custom docker image or use the one currently referenced in the docker-compose.yml
-1. Run the following command from the directory where the Dockerfile is located or specify its location:
-
-    ````
-    docker build -t=<your-dockerhub-username>/<image-name> .
-    ````
-
-(Don't forget the dot - it provides the context of where the Dockerfile is located)
-2. push the image to your dockerhub repo
-    ````
-    docker login
-    docker push <your-dockerhub-username>/<image-name>
-    ````
-replace the current image name with your image in the docker-compose.yml
-- **Note**: alternatively, we can uncomment the build node in the docker-compose.yml and run:
-    ````
-    docker compose build && docker compose up
-    ````
-To build and start our agent image and container
-
-### Modify docker-compose.yml 
-1. Replace JENKINS_AGENT_SSH_PUBKEY: with your public key
-    - run: `cat ~/.ssh/jenkins_agent_key.pub` to get your key
-
-### Start Jenkins Controller 
+### Start Jenkins 
 ````
-docker compose up jenkins-controller
+docker compose up jenkins
 ````
 - You should receive a default password in the console output. 
 -  Copy this password
@@ -52,7 +28,7 @@ localhost:8080
 - select the default plugin installation
 - enter 'admin' or whatever login credentials and email you desire
 
-## Stop here (optional)
+## Stop Jenkins
 You now have a fully functional Jenkins controller that you can start and stop with:
 ````
 docker compose up jenkins-controller
@@ -61,50 +37,31 @@ docker compose down
 You can use the Jenkins controller to execute jobs but that is NOT a recommended best practice by Jenkins.
 The following steps walk you through creating a Jenkins agent to execute jobs.
 
-### Create a Jenkins SSH credential
-1. Jenkins dashboard > Manage jenkins (side menu) > Manage Credentials (center menu)
-2. Select 'Add credentials' (drop-down menu next to global for jenkins)
-3. fill form:
-- Kind: SSH Username with private key;
-- id: jenkins
-- description: The jenkins ssh key
-- username: jenkins
-
-- Private Key: select Enter directly, copy and paste your key, and press the Add button to insert your private key 
-    - run: `cat ~/.ssh/jenkins_agent_key` to get your key
-    - copy the entire key (including the beginning and end phrases)
-
-- Passphrase: fill your passphrase used to generate the SSH key pair and then press OK
-![alt text](https://www.jenkins.io/doc/book/resources/node/credentials-3.png)
 
 ## Create a Jenkins agent
 1. Jenkins dashboard > Manage jenkins (side menu) > Manage Nodes and Clouds (center menu) > New Node (side menu)
 2. Fill the Node/agent name: agent1
    - Select the Type: Permanent Agent
-   - Remote root directory: /var/jenkins 
+   - Remote root directory: /var/jenkins (where agent config files, etc will be saved) ex /Users/brandonwilliams/jenkins-agent-files
+  
+ NOTE: create this directory first and give it full read, write, execute permissions: sudo chmod ugo+ rwx "jenkins"
    
    - label: agent1 
    
    - usage: Use this node as much as possible
    
-   - Launch method; (e.g.: Launch agents via SSH )
-   
-   - Host; (your local machines IP address - found on Mac at System Preferences > Network, under the **Connected** field)
-   
-   - Credentials; (e.g.: jenkins )
-   
-   - Host Key verification Strategy; (e.g.: Manually trusted key verification …​ )
-   - Do not check 'Require manual verification...'
+   - Launch method; (e.g.: Launch agent by connecting it to the master)
    
 3. Click save, and the agent will be registered, but offline. 
+4. Select the newly created agent
+5. Download the agent.jar
+6. Copy and run the “Run from agent command line:” command from the dir where agent.jar is located
 
+NOTE: Use 'sudo' to give agent the necessary rights to download and store the needed .jars (dependencies). If running on Windows, simply launch the command prompt as Administrator and run the command WITHOUT sudo
+
+ex 
+sudo java -jar agent.jar -jnlpUrl http://localhost:8080/computer/Docker1/jenkins-agent.jnlp -secret afb034420ecea40ae7783c236cba08997da5f04c07655c4465fc591390c9a11e -workDir "/Users/brandonwilliams/jenkins"
 
 
 ### Stop Jenkins
-Enter `ctrl + c` in the terminal where you started to stop the Jenkins controller -or- enter `docker compose down` from the directory where the docker-compose.yml is located.
-
-### Start the Jenkins Controller + Agent
-Run: `docker compose up` to start both the Jenkins controller **AND** the agent node  
-
-**NOTE:** 
-use `docker compose up -d` to start everything in 'detached' or 'background' mode. You won't see the console logs, but it will return to the terminal where you can use `docker compose down` to bring everything down.
+Enter `docker compose down` from the directory where the docker-compose.yml is located.
