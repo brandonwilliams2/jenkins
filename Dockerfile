@@ -32,5 +32,13 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
 # 6- Define environmental variables required by Maven, like Maven_Home directory and where the maven repo is located
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
-
-RUN echo PATH=$PATH >> /etc/environment
+#
+## Downloading and installing Docker CLI
+#ENV DOCKER_VERSION=20.10.8
+#RUN mkdir -p /usr/share/docker
+#  && curl -sfL -o docker.tgz "https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz" && \
+#  tar -xzf docker.tgz docker/docker --strip=1 --directory /usr/local/bin && \
+#  rm docker.tgz
+#
+#RUN echo PATH=$PATH >> /etc/environment
+##COPY --from=docker/compose:1.25.0-alpine /usr/local/bin/docker-compose /usr/local/bin/
