@@ -146,7 +146,7 @@ When Jenkins runs these jobs they will reach out to the .git repo, access the Je
             docker compose down
             ```
 
-![CI/CD Workflow](images/selenium-cicd.png)
+![CI/CD Workflow](./images/selenium-cicd.png)
 
 ### Stop Jenkins
 Enter `docker compose down` from the directory where the docker-compose.yml is located.
