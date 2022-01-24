@@ -101,51 +101,51 @@ When Jenkins runs these jobs they will reach out to the .git repo, access the Je
 1. Developers/Test engineers regularly add/modify/commit test cases and push them to the github repo
 2. Run the Jenkins job: "Selenium_Test_Builder". This job will reach out to the 'java-selenium-framework' github repo and grab the Jenkinsfile
 3. "Selenium_Test_Builder" will then execute the stages from Jenkinsfile script:
-    
-    4. Stage 1: "Build Jars" – executes `sh "mvn clean package -DskipTests"`
-        
-        5. Jenkins agent will pull the test script project from github and package it into jar
-        
-    6. Stage 2: "Build Image" executes `sh "docker build -t='brandonwilliams2/java-selenium' ."`
-    
-        7. Jenkins agent will build the test script image according to the instructions in the Dockerfile
-        
-    8. Stage 3: "Push Image"
-    
-        9. Jenkins agent will use your docker hub credentials securely stored and passed in from Jenkins to login to docker hub and push the updated image to the repo
-        
-10. The Jenkins job "Selenium_Test_Runner" will reach out to the 'selenium-test-runner' github repo and grab the Jenkisfile
 
-11. "Selenium_Test_Runner" will then execute the stages from Jenkinsfile script:
-    12. Stage 1: "Pull Latest Image"
+    * Stage 1: "Build Jars" – executes `sh "mvn clean package -DskipTests"`
+        
+        * Jenkins agent will pull the test script project from github and package it into executabe jars
+        
+    * Stage 2: "Build Image" executes 
     
-        13. Jenkins agent will pull down the latest test script image with all of the updated project and test jars and dependencies
+        * The Jenkins agent will build the test script image according to the instructions in the Dockerfile ```
+                                                                                                                sh "docker build -t='brandonwilliams2/java-selenium' ."
+                                                                                                                ```
         
-        14. Stage 2: "Start Grid"
+    * Stage 3: "Push Image"
+    
+        * Jenkins agent will use your docker hub credentials securely stored and passed in from Jenkins to login to docker hub and push the updated image to the repo
         
-            15. Jenkins agent will start the selenium gird containers (hub, chrome, firefox) in background mode (-d option)
+4. Run the Jenkins job "Selenium_Test_Runner" which will reach out to the 'selenium-test-runner' github repo and grab the Jenkisfile
+
+5. "Selenium_Test_Runner" will then execute the stages from Jenkinsfile script:
+
+    * Stage 1: "Pull Latest Image"
+    
+        * Jenkins agent will pull down the latest test script image with all of the updated project and test jars and dependencies
+        
+    * Stage 2: "Start Grid"
+        
+        * Jenkins agent will start the selenium gird containers (hub, chrome, firefox) in background mode (-d option)
             ```
             sh "docker-compose up -d hub chrome firefox --no-color"
             ```
             
-        16. Stage 3: "Run Tests"
+    * Stage 3: "Run Tests"
         
-            17. Jenkins agent will start the test script containers for the services specified in this command
+        * Jenkins agent will start the test script containers for the services specified in this command
             ```
             sh "docker-compose up search-feature book-flight-feature  --no-color"
             ```
             
-            18. The docker-compose.yml informs each test script container where the selenium grid is (HUB_HOST), which test suite to run, on which browser.
+        * The docker-compose.yml informs each test script container where the selenium grid is (HUB_HOST), which test suite to run, on which browser.
             
-        19. Post stages
-        
-            20. In the post-stage the Jenkins agent will archive the results and bring down all of the containers using:
+6. Post stages
+    * In the post-stage the Jenkins agent will archive the results and bring down all of the containers using:
             ```
             docker compose down
             ```
-                 
-
-
+          
 ### Stop Jenkins
 Enter `docker compose down` from the directory where the docker-compose.yml is located.
 
