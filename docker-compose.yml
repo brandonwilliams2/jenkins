@@ -9,7 +9,7 @@ services:
     environment:
       - TZ=America/Denver
     volumes:
-      - $HOME/jenkins:/var/jenkins_home
+      - $HOME/jenkins:/var/jenkins_home #volume mapping to save jenkins configuration
     ports:
-      - 8080:8080
-      - 50000:50000
+      - 8080:8080 # port for access to Jenkins Console
+      - 50000:50000 # port for JNLP connection from Jenkins Agent to the Jenkins Controller
