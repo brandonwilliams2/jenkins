@@ -145,7 +145,9 @@ When Jenkins runs these jobs they will reach out to the .git repo, access the Je
             ```
             docker compose down
             ```
-          
+            
+            ![image](https://user-images.githubusercontent.com/40369255/150849565-7dc02727-168b-4f67-b7a7-a695ea102a6e.png)
+
 ### Stop Jenkins
 Enter `docker compose down` from the directory where the docker-compose.yml is located.
 
