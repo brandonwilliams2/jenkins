@@ -1,4 +1,4 @@
-# jenkins-runner
+# Jenkins
 docker-compose.yml to quickly spin-up a Jenkins server
 
 ### Requirements:
