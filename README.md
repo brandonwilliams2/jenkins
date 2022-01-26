@@ -60,7 +60,7 @@ The following steps walk you through creating a Jenkins agent to execute jobs.
 NOTE: Use 'sudo' to give agent the necessary rights to download and store the needed .jars (dependencies). If running on Windows, simply launch the command prompt as Administrator and run the command WITHOUT sudo
 
 ex 
-sudo java -jar agent.jar -jnlpUrl http://localhost:8080/computer/Docker1/jenkins-agent.jnlp -secret afb034420ecea40ae7783c236cba08997da5f04c07655c4465fc591390c9a11e -workDir "/Users/brandonwilliams/jenkins"
+java -jar agent.jar -jnlpUrl http://localhost:8080/computer/Agent1/jenkins-agent.jnlp -secret 32f60c7147d5d69233149a56034bb74fccb9d071ecc0d01c865968bdbdba50fc -workDir "/Users/brandonwilliams/jenkins-agent-files"
 
 
 ## Add Docker Hub Credentials
@@ -78,22 +78,22 @@ Docker hub credentials will be used by Jenkins to push and pull docker images fr
 
 1. Jenkins > New Item > Pipeline
 2. Pipeline > Definition >
-    3. Pipeline script from SCM
-        4. SCM > Git
-            5. Repositories > Repository URL > URL of 'java-selenium-framework' repo
-            6. Credentials > add credentials if NOT a public repo
-        7. Script Path > Jenkinsfile
-        8. Additional Behaviours > Clean before checkout
+    * Pipeline script from SCM
+        * SCM > Git
+            * Repositories > Repository URL > URL of 'java-selenium-framework' repo
+            * Credentials > add credentials if NOT a public repo
+        * Script Path > Jenkinsfile
+        * Additional Behaviours > Clean before checkout
 
 ## Create new Jenkins jobs for pulling and running test images
 1. Jenkins > New Item > Pipeline
 2. Pipeline > Definition >
-    3. Pipeline script from SCM
-        4. SCM > Git
-            5. Repositories > Repository URL > URL of 'selenium-test-runner' repo
-            6. Credentials > add credentials if NOT a public repo
-        7. Script Path > Jenkinsfile
-        8. Additional Behaviours > Clean before checkout
+    * Pipeline script from SCM
+        * SCM > Git
+            * Repositories > Repository URL > URL of 'selenium-test-runner' repo
+            * Credentials > add credentials if NOT a public repo
+        * Script Path > Jenkinsfile
+        * Additional Behaviours > Clean before checkout
 
 When Jenkins runs these jobs they will reach out to the .git repo, access the Jenkinsfile ane execute the pipeline stages
 
