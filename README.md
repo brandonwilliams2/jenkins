@@ -97,6 +97,12 @@ Docker hub credentials will be used by Jenkins to push and pull docker images fr
 
 When Jenkins runs these jobs they will reach out to the .git repo, access the Jenkinsfile ane execute the pipeline stages
 
+## Configure Content Security Policy to enable Archived TestNG reports to be viewable in Jenkins
+1. Copy the 'Unset the header script'
+    * See: [Jenkins docs: Configuring Content Security Policy](https://www.jenkins.io/doc/book/security/configuring-content-security-policy/)
+2. In Jenkins console navigate to Manage Jenkins > Script Console 
+3. Paste the script into the script console and click 'Run'
+
 ### CI/CD 
 1. Developers/Test engineers regularly add/modify/commit test cases and push them to the github repo
 2. Run the Jenkins job: "Selenium_Test_Builder". This job will reach out to the 'java-selenium-framework' github repo and grab the Jenkinsfile
