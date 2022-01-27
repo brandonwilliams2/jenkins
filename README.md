@@ -60,7 +60,7 @@ The following steps walk you through creating a Jenkins agent to execute jobs.
 NOTE: Use 'sudo' to give agent the necessary rights to download and store the needed .jars (dependencies). If running on Windows, simply launch the command prompt as Administrator and run the command WITHOUT sudo
 
 ex 
-java -jar /path/to/agent.jar -jnlpUrl http://localhost:8080/computer/Agent1/jenkins-agent.jnlp -secret 32f60c7147d5d69233149a56034bb74fccb9d071ecc0d01c865968bdbdba50fc -workDir "/path/to/jenkins-agent-files"
+sudo java -jar /path/to/agent.jar -jnlpUrl http://localhost:8080/computer/Agent1/jenkins-agent.jnlp -secret 32f60c7147d5d69233149a56034bb74fccb9d071ecc0d01c865968bdbdba50fc -workDir "/path/to/jenkins-agent-files"
 
 
 ## Add Docker Hub Credentials
