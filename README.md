@@ -10,7 +10,7 @@ docker-compose.yml to quickly spin-up a Jenkins server
 The first time we run the project we have to manually navigate to Jenkins and set everything up. On subsequent runs the server configurations will be saved
 
 ### Clone Repo
-https://github.com/brandonwilliams2/jenkins-runner.git
+https://github.com/brandonwilliams2/jenkins.git
 
 ### Start Jenkins 
 ````
