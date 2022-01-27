@@ -3,7 +3,7 @@ docker-compose.yml to quickly spin-up a Jenkins server
 
 ### Requirements:
 1. Docker has been downloaded, installed, and running on your machine (https://www.docker.com/products/docker-desktop)
-2. Dockerhub account has been created (https://hub.docker.com/) (optional)
+2. Dockerhub account has been created (https://hub.docker.com/)
 
 
 ## Setup
