@@ -44,7 +44,7 @@ The following steps walk you through creating a Jenkins agent to execute jobs.
    - Select the Type: Permanent Agent
    - Remote root directory: where agent config files, etc will be saved ex /Users/brandonwilliams/jenkins-agent-files
   
- NOTE: create this directory first and give Jenkins full read, write, execute permissions: `sudo chmod ugo+ rwx "jenkins"`
+ NOTE: create this directory first and give Jenkins full read, write, execute permissions: `sudo chmod ugo+ rwx "jenkins-agent-files"`
    
    - label: agent1 
    
