@@ -29,7 +29,7 @@ localhost:8080
 - enter 'admin' or whatever login credentials and email you desire
 
 ## Stop Jenkins
-You now have a fully functional Jenkins controller that you can start and stop with:
+You now have a fully functional Jenkins server that you can start and stop with:
 ```
 docker compose up
 docker compose down
